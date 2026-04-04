@@ -1,0 +1,57 @@
+/* File: src/styles/print.css */
+/* Print-safe overrides — imported globally so they apply during react-to-print */
+
+@media print {
+  /* Hide all UI chrome */
+  body > #root > * > *:not(.resume-preview-root),
+  nav,
+  header,
+  aside,
+  .no-print {
+    display: none !important;
+  }
+
+  /* Reset page */
+  @page {
+    size: A4;
+    margin: 12mm 14mm;
+  }
+
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    background: white !important;
+    font-size: 12pt;
+  }
+
+  /* Ensure colors print accurately */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+
+  /* Remove shadows that look bad on paper */
+  .resume-preview-root,
+  .resume-preview-root * {
+    box-shadow: none !important;
+  }
+
+  /* Sensible page breaks */
+  section,
+  .section-block {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  h1, h2, h3 {
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+
+  /* Ensure links are visible */
+  a[href]::after {
+    content: none; /* Don't append URL — resume links should be clean */
+  }
+}
