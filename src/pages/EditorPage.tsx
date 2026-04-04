@@ -2,6 +2,8 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { useReactToPrint } from 'react-to-print';
 import { useResumeStore } from '../store/resumeStore';
+import { useAuthStore } from '../store/authStore';
+import { saveResume } from '../services/resumeService';
 import HeaderEditor from '../components/editor/HeaderEditor';
 import SectionManager from '../components/editor/SectionManager';
 import StylePanel from '../components/editor/StylePanel';
@@ -14,13 +16,25 @@ type MobileView = 'edit' | 'preview';
 const ZOOM_LEVELS = [0, 75, 100, 125] as const;
 
 export default function EditorPage() {
-  const { resume, displaySettings, undo, redo, past, future } = useResumeStore();
+  const { resume, displaySettings, undo, redo, past, future, setPage } = useResumeStore();
+  const user = useAuthStore((s) => s.user);
   const [activeTab, setActiveTab] = useState<LeftTab>('header');
   const [mobileView, setMobileView] = useState<MobileView>('edit');
   const [zoom, setZoom] = useState<number>(0); // 0 = fit
   const [saveStatus, setSaveStatus] = useState<'idle' | 'saving' | 'saved'>('idle');
+  const [dashSaveStatus, setDashSaveStatus] = useState<'idle' | 'saving' | 'saved'>('idle');
   const printRef = useRef<HTMLDivElement>(null);
   const lastUpdatedAt = useRef(resume.meta.updatedAt);
+
+  function handleSaveToDashboard() {
+    if (!user) { setPage('login'); return; }
+    setDashSaveStatus('saving');
+    const existingId = sessionStorage.getItem('cc_editing_resume_id') ?? undefined;
+    const record = saveResume(user.id, resume, existingId);
+    sessionStorage.setItem('cc_editing_resume_id', record.id);
+    setTimeout(() => setDashSaveStatus('saved'), 400);
+    setTimeout(() => setDashSaveStatus('idle'), 2500);
+  }
 
   // Autosave feedback
   useEffect(() => {
@@ -143,6 +157,17 @@ export default function EditorPage() {
                 </button>
               ))}
             </div>
+
+            {/* Save to Dashboard */}
+            <button
+              onClick={handleSaveToDashboard}
+              className="flex items-center gap-1.5 text-xs px-3 py-1.5 bg-emerald-600 text-white rounded-lg font-semibold hover:bg-emerald-700 transition-colors"
+              aria-label="Save to dashboard"
+              title={user ? 'Save resume to your dashboard' : 'Sign in to save'}
+            >
+              {dashSaveStatus === 'saved' ? '✓ Saved' : dashSaveStatus === 'saving' ? '…' : '💾'}
+              <span className="hidden sm:inline">{dashSaveStatus === 'saved' ? 'Saved!' : 'Save'}</span>
+            </button>
 
             {/* Download button */}
             <button

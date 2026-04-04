@@ -31,7 +31,7 @@ function scheduleAutosave(resume: Resume, displaySettings: DisplaySettings) {
   autosaveTimer = setTimeout(() => saveToStorage(resume, displaySettings), 500);
 }
 
-export type AppPage = 'templates' | 'editor' | 'ats' | 'export';
+export type AppPage = 'templates' | 'editor' | 'ats' | 'export' | 'login' | 'signup' | 'dashboard';
 
 interface ResumeStore {
   resume: Resume;
@@ -151,7 +151,7 @@ export const useResumeStore = create<ResumeStore>((set, get) => ({
   displaySettings: stored.displaySettings,
   past: [],
   future: [],
-  currentPage: 'editor',
+  currentPage: 'login',
   atsResult: null,
   atsJobDescription: '',
 
