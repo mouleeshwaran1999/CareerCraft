@@ -7,10 +7,11 @@ import { saveResume } from '../services/resumeService';
 import HeaderEditor from '../components/editor/HeaderEditor';
 import SectionManager from '../components/editor/SectionManager';
 import StylePanel from '../components/editor/StylePanel';
+import TemplateGallery from '../components/gallery/TemplateGallery';
 import ResumePreview from '../components/preview/ResumePreview';
 import { APP_NAME } from '../config/appConfig';
 
-type LeftTab = 'header' | 'sections' | 'style';
+type LeftTab = 'header' | 'sections' | 'style' | 'template';
 type MobileView = 'edit' | 'preview';
 
 const ZOOM_LEVELS = [0, 75, 100, 125] as const;
@@ -64,6 +65,7 @@ export default function EditorPage() {
     { key: 'header', label: 'Contact' },
     { key: 'sections', label: 'Sections' },
     { key: 'style', label: 'Style' },
+    { key: 'template', label: 'Template' },
   ];
 
   return (
@@ -110,14 +112,22 @@ export default function EditorPage() {
             </span>
           </div>
 
-          {/* Tabs */}
-          <div className="flex border-b border-gray-200 shrink-0" role="tablist" aria-label="Editor panels">
+          {/* Tabs — scrollable row so 4 tabs never squish on narrow widths */}
+          <div
+            className="flex border-b border-gray-200 shrink-0 overflow-x-auto scrollbar-none"
+            role="tablist"
+            aria-label="Editor panels"
+          >
             {tabs.map((tab) => (
               <button key={tab.key} role="tab"
                 aria-selected={activeTab === tab.key}
                 aria-controls={`panel-${tab.key}`}
                 onClick={() => setActiveTab(tab.key)}
-                className={`flex-1 py-2.5 text-xs font-semibold transition-colors border-b-2 ${activeTab === tab.key ? 'border-blue-500 text-blue-600 bg-blue-50/50' : 'border-transparent text-gray-500 hover:text-gray-700 hover:bg-gray-50'}`}
+                className={`shrink-0 flex-1 min-w-[72px] py-2.5 px-2 text-xs font-semibold transition-colors border-b-2 whitespace-nowrap ${
+                  activeTab === tab.key
+                    ? 'border-blue-500 text-blue-600 bg-blue-50/50'
+                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:bg-gray-50'
+                }`}
               >
                 {tab.label}
               </button>
@@ -129,6 +139,7 @@ export default function EditorPage() {
             {activeTab === 'header'   && <HeaderEditor />}
             {activeTab === 'sections' && <SectionManager />}
             {activeTab === 'style'    && <StylePanel />}
+            {activeTab === 'template' && <div className="-mx-4 -mt-4"><TemplateGallery compact /></div>}
           </div>
         </div>
 

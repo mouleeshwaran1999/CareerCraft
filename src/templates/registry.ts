@@ -332,6 +332,144 @@ const infographicLite: TemplateDefinitionV2 = {
   defaultStyles: { templateId: 'infographic-lite', fontFamily: 'Lato', fontSize: 13, primaryColor: '#c2410c', accentColor: '#fb923c', spacing: 'normal', columns: 2 },
 };
 
+// ─── Plain White Templates (no color, ATS-friendly) ──────────────────────────
+
+const plainClassic: TemplateDefinitionV2 = {
+  version: 2,
+  id: 'plain-classic',
+  name: 'Plain Classic',
+  category: 'ats',
+  description: 'Pure white, serif, centered header. Traditional academic/formal style. Zero color — maximum ATS compatibility.',
+  isAtsFriendly: true,
+  tags: ['plain', 'white', 'ats', 'serif', 'centered', 'classic', 'academic'],
+  flags: { supportsPhoto: false, supportsIcons: false, supportsBackgroundPattern: false, supportsColumns: false },
+  layout: 'single',
+  headerVariant: 'centered',
+  sectionStyle: 'underline',
+  tokens: {
+    primaryColor: '#111111',
+    accentColor: '#444444',
+    bgColor: '#ffffff',
+    sidebarBg: '#ffffff',
+    sidebarText: '#111111',
+    textColor: '#111111',
+    mutedColor: '#555555',
+    fontFamily: 'Georgia, serif',
+    headingFont: 'Georgia, serif',
+    fontSize: 13,
+  },
+  defaultStyles: { templateId: 'plain-classic', fontFamily: 'Georgia', fontSize: 13, primaryColor: '#111111', accentColor: '#444444', spacing: 'normal', columns: 1 },
+};
+
+const plainModern: TemplateDefinitionV2 = {
+  version: 2,
+  id: 'plain-modern',
+  name: 'Plain Modern',
+  category: 'ats',
+  description: 'Pure white, left-aligned header, generous whitespace, minimal section headings. Clean and contemporary.',
+  isAtsFriendly: true,
+  tags: ['plain', 'white', 'ats', 'modern', 'minimal', 'left', 'sans-serif'],
+  flags: { supportsPhoto: false, supportsIcons: false, supportsBackgroundPattern: false, supportsColumns: false },
+  layout: 'single',
+  headerVariant: 'left',
+  sectionStyle: 'minimal',
+  tokens: {
+    primaryColor: '#111111',
+    accentColor: '#333333',
+    bgColor: '#ffffff',
+    sidebarBg: '#ffffff',
+    sidebarText: '#111111',
+    textColor: '#111111',
+    mutedColor: '#555555',
+    fontFamily: 'Inter, sans-serif',
+    headingFont: 'Inter, sans-serif',
+    fontSize: 13,
+  },
+  defaultStyles: { templateId: 'plain-modern', fontFamily: 'Inter', fontSize: 13, primaryColor: '#111111', accentColor: '#333333', spacing: 'relaxed', columns: 1 },
+};
+
+const plainCompact: TemplateDefinitionV2 = {
+  version: 2,
+  id: 'plain-compact',
+  name: 'Plain Compact',
+  category: 'ats',
+  description: 'Pure white, compact header, dense layout optimized for one-page resumes. Maximum content density.',
+  isAtsFriendly: true,
+  tags: ['plain', 'white', 'ats', 'compact', 'dense', 'one-page'],
+  flags: { supportsPhoto: false, supportsIcons: false, supportsBackgroundPattern: false, supportsColumns: false },
+  layout: 'single',
+  headerVariant: 'compact',
+  sectionStyle: 'filled-bar',
+  tokens: {
+    primaryColor: '#111111',
+    accentColor: '#333333',
+    bgColor: '#ffffff',
+    sidebarBg: '#ffffff',
+    sidebarText: '#111111',
+    textColor: '#111111',
+    mutedColor: '#555555',
+    fontFamily: 'Arial, Helvetica, sans-serif',
+    headingFont: 'Arial, Helvetica, sans-serif',
+    fontSize: 12,
+  },
+  defaultStyles: { templateId: 'plain-compact', fontFamily: 'Arial', fontSize: 12, primaryColor: '#111111', accentColor: '#333333', spacing: 'compact', columns: 1 },
+};
+
+const plainTwoColumn: TemplateDefinitionV2 = {
+  version: 2,
+  id: 'plain-two-column',
+  name: 'Plain Two Column',
+  category: 'ats',
+  description: 'Pure white two-column layout. Skills/certs in right sidebar, experience/education in main column.',
+  isAtsFriendly: true,
+  tags: ['plain', 'white', 'ats', 'two-column', 'sidebar'],
+  flags: { supportsPhoto: false, supportsIcons: false, supportsBackgroundPattern: false, supportsColumns: true },
+  layout: 'sidebar-right',
+  headerVariant: 'left',
+  sectionStyle: 'underline',
+  sidebarSections: ['skills', 'languages', 'certifications', 'awards', 'courses'],
+  tokens: {
+    primaryColor: '#111111',
+    accentColor: '#333333',
+    bgColor: '#ffffff',
+    sidebarBg: '#ffffff',
+    sidebarText: '#111111',
+    textColor: '#111111',
+    mutedColor: '#555555',
+    fontFamily: 'Inter, sans-serif',
+    headingFont: 'Inter, sans-serif',
+    fontSize: 13,
+  },
+  defaultStyles: { templateId: 'plain-two-column', fontFamily: 'Inter', fontSize: 13, primaryColor: '#111111', accentColor: '#333333', spacing: 'normal', columns: 2 },
+};
+
+const plainSkillsFirst: TemplateDefinitionV2 = {
+  version: 2,
+  id: 'plain-skills-first',
+  name: 'Plain Skills First',
+  category: 'ats',
+  description: 'Pure white single-column with dot-rule section dividers. Designed for skills-forward resumes.',
+  isAtsFriendly: true,
+  tags: ['plain', 'white', 'ats', 'skills', 'dot-rule', 'single-column'],
+  flags: { supportsPhoto: false, supportsIcons: false, supportsBackgroundPattern: false, supportsColumns: false },
+  layout: 'single',
+  headerVariant: 'left',
+  sectionStyle: 'dot-rule',
+  tokens: {
+    primaryColor: '#111111',
+    accentColor: '#444444',
+    bgColor: '#ffffff',
+    sidebarBg: '#ffffff',
+    sidebarText: '#111111',
+    textColor: '#111111',
+    mutedColor: '#555555',
+    fontFamily: 'Roboto, sans-serif',
+    headingFont: 'Roboto, sans-serif',
+    fontSize: 13,
+  },
+  defaultStyles: { templateId: 'plain-skills-first', fontFamily: 'Roboto', fontSize: 13, primaryColor: '#111111', accentColor: '#444444', spacing: 'normal', columns: 1 },
+};
+
 // ─── Registry ─────────────────────────────────────────────────────────────────
 
 export const TEMPLATE_REGISTRY_V2: TemplateDefinitionV2[] = [
@@ -347,6 +485,11 @@ export const TEMPLATE_REGISTRY_V2: TemplateDefinitionV2[] = [
   darkHeader,
   gradientAccent,
   infographicLite,
+  plainClassic,
+  plainModern,
+  plainCompact,
+  plainTwoColumn,
+  plainSkillsFirst,
 ];
 
 export const TEMPLATE_MAP_V2 = Object.fromEntries(TEMPLATE_REGISTRY_V2.map((t) => [t.id, t]));

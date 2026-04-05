@@ -5,7 +5,6 @@ import { useAuthStore } from '../../store/authStore';
 import { APP_NAME, APP_TAGLINE } from '../../config/appConfig';
 
 const NAV_ITEMS: { key: AppPage; label: string; icon: string }[] = [
-  { key: 'templates', label: 'Templates', icon: '🎨' },
   { key: 'editor', label: 'Editor', icon: '✏️' },
   { key: 'ats', label: 'ATS Checker', icon: '📊' },
   { key: 'export', label: 'Export', icon: '📤' },

@@ -117,7 +117,7 @@ function V2Card({ template, isActive, onSelect }: { template: TemplateDefinition
   );
 }
 
-export default function TemplateGallery() {
+export default function TemplateGallery({ compact = false }: { compact?: boolean }) {
   const { resume, applyTemplate, setPage } = useResumeStore();
   const [search, setSearch] = useState('');
   const [category, setCategory] = useState<Category>('all');
@@ -149,14 +149,16 @@ export default function TemplateGallery() {
   const activeTemplate = allTemplates.find((t) => t.id === activeTemplateId);
 
   return (
-    <div className="p-6 max-w-7xl mx-auto">
-      <div className="mb-6">
-        <h1 className="text-2xl font-bold text-gray-900 mb-1">Template Gallery</h1>
-        <p className="text-sm text-gray-500">{TEMPLATES.length} classic + {TEMPLATE_REGISTRY_V2.length} V2 templates — {TEMPLATE_REGISTRY_V2.filter((t) => t.isAtsFriendly).length} ATS-certified.</p>
-      </div>
+    <div className={compact ? 'p-3' : 'p-6 max-w-7xl mx-auto'}>
+      {!compact && (
+        <div className="mb-6">
+          <h1 className="text-2xl font-bold text-gray-900 mb-1">Template Gallery</h1>
+          <p className="text-sm text-gray-500">{TEMPLATES.length} classic + {TEMPLATE_REGISTRY_V2.length} V2 templates — {TEMPLATE_REGISTRY_V2.filter((t) => t.isAtsFriendly).length} ATS-certified.</p>
+        </div>
+      )}
 
       {/* Search + Filter */}
-      <div className="flex flex-col sm:flex-row gap-3 mb-4">
+      <div className={`flex gap-2 mb-3 ${compact ? 'flex-col' : 'flex-col sm:flex-row'}`}>
         <input
           type="search"
           value={search}
@@ -175,7 +177,7 @@ export default function TemplateGallery() {
           <span className="bg-green-50 text-green-700 border border-green-200 px-2 py-1 rounded-md font-medium text-xs">ATS-Friendly only</span>
         </label>
       </div>
-      <div className="flex gap-2 flex-wrap mb-6" role="group" aria-label="Filter by category">
+      <div className={`flex gap-1.5 mb-4 ${compact ? 'overflow-x-auto pb-1 flex-nowrap scrollbar-none' : 'flex-wrap'}`} role="group" aria-label="Filter by category">
         {CATEGORIES.map((cat) => (
           <button
             key={cat}
@@ -189,7 +191,11 @@ export default function TemplateGallery() {
       </div>
 
       {/* Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5">
+      <div className={`grid gap-4 ${
+        compact
+          ? 'grid-cols-2'
+          : 'grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5'
+      }`}>
         {filtered.map((t) =>
           t.kind === 'v1'
             ? <V1Card key={t.data.id} template={t.data} isActive={activeTemplateId === t.data.id} onSelect={() => handleSelectV1(t.data)} />
@@ -204,7 +210,7 @@ export default function TemplateGallery() {
         </div>
       )}
 
-      {activeTemplateId && (
+      {!compact && activeTemplateId && (
         <div className="mt-8 p-4 bg-blue-50 border border-blue-200 rounded-xl flex items-center justify-between flex-wrap gap-3">
           <div>
             <span className="font-semibold text-blue-800">Selected: </span>
